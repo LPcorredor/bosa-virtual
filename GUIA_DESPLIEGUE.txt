@@ -1,0 +1,81 @@
+GUIA DE DESPLIEGUE A GITHUB Y VERCEL - BOSA VIRTUAL
+=====================================================
+
+Esta guía te guiará paso a paso para publicar el proyecto Bosa Virtual Next.js que acabamos de construir.
+Con esto, tu proyecto quedará guardado de manera segura en tu cuenta de GitHub y alojado gratuitamente
+en Internet a través de Vercel.
+
+---
+
+PASO 1: CREAR EL REPOSITORIO EN GITHUB
+1. Entra a tu cuenta en Github.com desde el navegador.
+2. Arriba a la derecha, haz clic en el ícono de "+" y selecciona "New repository" (Nuevo repositorio).
+3. En "Repository name", pon un nombre (ejemplo: "bosa-virtual").
+4. Asegúrate de marcarlo como "Public" o "Private" según prefieras. (Te recomiendo "Private" inicialmente).
+5. IMPORTANTE: NO marques "Add a README file" ni "Add .gitignore". Déjalo todo en blanco.
+6. Haz clic en el botón verde "Create repository" al final de la página.
+7. Se abrirá una página con instrucciones. Busca la URL de tu repositorio (se verá algo como `https://github.com/tu-usuario/bosa-virtual.git`).
+
+---
+
+PASO 2: SUBIR EL CODIGO DESDE TU TERMINAL LOCAL (MAC)
+1. Abre tu aplicación de Terminal.
+2. Navega hasta la carpeta del nuevo proyecto: 
+   $ cd "/Users/macbokpro/Desktop/pag lucho/bosa-virtual-next"
+
+3. En este nuevo proyecto de Next, ya existe un repositorio git (se creó automáticamente). 
+   Vamos a preparar los archivos para subirlos:
+   $ git add .
+   
+4. Guarda los cambios con un mensaje:
+   $ git commit -m "Primera subida: Migración a Next.js completa"
+   
+5. Conecta tu carpeta local con el repositorio de GitHub que creaste en el PASO 1.
+   (Reemplaza la URL en el siguiente comando con la tuya propia):
+   $ git remote add origin https://github.com/tu-usuario/bosa-virtual.git
+   
+6. Cambia el nombre de la rama principal a 'main':
+   $ git branch -M main
+
+7. Finalmente, empuja (sube) los archivos a tu cuenta de GitHub:
+   $ git push -u origin main
+   
+8. ¡Listo! Si recargas tu página de GitHub, ya verás allí tu código.
+   (Nota que la carpeta node_modules ni tu archivo .env.local se habrán subido. Esto es perfecto y seguro).
+
+---
+
+PASO 3: DESPLEGAR LA PÁGINA EN VERCEL
+1. Abre tu navegador y ve a https://vercel.com/ (Crea una cuenta allí vinculando tu cuenta de GitHub).
+2. En tu Dashboard de Vercel, haz clic en "Add New" y luego en "Project".
+3. Vercel te mostrará una lista de tus repositorios de GitHub. Encuentra "bosa-virtual" y haz clic en "Import".
+4. Deja todo como está (Nombra el proyecto, verifica que diga 'Next.js' en Framework Preset).
+
+---
+
+PASO 4: CONFIGURAR TUS LLAVES SECRETAS EN VERCEL (CRÍTICO)
+Antes de darle a desplegar, debemos decirle a Vercel cómo conectarse a tu Firebase y a tu Cloudinary.
+1. En esa misma pantalla de configuración en Vercel, busca el apartado desplegable llamado "Environment Variables" (Variables de Entorno) y expándelo.
+2. Aquí necesitamos pegar los datos de tu archivo `.env.local`. 
+3. Abre tu archivo local `/Users/macbokpro/Desktop/pag lucho/bosa-virtual-next/.env.local`
+4. Deberás ir copiando clave y valor a la pantalla de Vercel. 
+   Por ejemplo:
+   - Name: NEXT_PUBLIC_FIREBASE_API_KEY
+   - Value: AIzaSyBi6v... (Asegúrate de copiar el valor real sin las comillas).
+   - Haz clic en "Add".
+5. Repite el paso anterior, agregando manualmente UNA POR UNA todas las demás claves:
+   - NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+   - NEXT_PUBLIC_FIREBASE_PROJECT_ID
+   - NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+   - NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+   - NEXT_PUBLIC_FIREBASE_APP_ID
+   - NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+   - NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+6. Una vez que hayas agregado las 8 variables, haz clic en el botón inferior grande y azul que dice "Deploy" (Desplegar).
+
+---
+
+PASO 5: ¡ÉXITO!
+- Vercel tomará uno o dos minutos compilando tu código e inyectándole las variables secretas que le diste, tal como lo hacíamos en tu máquina local.
+- Cuando termine con una pantalla de celebración, haz clic en "Continue to Dashboard" y busca el botón de "Visit".
+- ¡Eso es todo! Bosa Virtual ya está viva en internet, conectada de manera segura a tu base de datos y lista para que los estudiantes la usen y tú puedas enviársela a cualquiera mediante la URL oficial.
